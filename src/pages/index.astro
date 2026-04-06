@@ -1,0 +1,482 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base>
+  <!-- ======== HEADER ======== -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#home" class="logo">
+        <img src="/assets/logo.png" alt="FasByteX" class="logo-img" />
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#team" class="nav-link">Team</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link nav-cta">Get in Touch</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ======== HERO ======== -->
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <span class="badge reveal-up">Futuristic Web Design Studio</span>
+        <h1 class="reveal-up">
+          We build
+          <span class="text-gradient">next-generation websites</span>
+          that make your brand impossible to ignore.
+        </h1>
+        <p class="hero-sub reveal-up">
+          From sleek service sites to immersive digital portfolios, we create
+          high-impact online experiences with strategy, motion, and futuristic
+          visual identity.
+        </p>
+        <div class="hero-ctas reveal-up">
+          <a href="#services" class="btn btn-primary">Our Services</a>
+          <a href="#contact" class="btn btn-ghost">Start a Project <span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+
+      <!-- Full-width cinematic video -->
+      <div class="hero-showcase reveal-up">
+        <div class="showcase-glow"></div>
+        <video autoplay muted loop playsinline class="showcase-video">
+          <source src="/assets/hero.mp4" type="video/mp4" />
+        </video>
+        <div class="showcase-sweep"></div>
+      </div>
+
+      <!-- Stats Strip -->
+      <div class="container">
+        <div class="stats-strip reveal-up">
+          <div class="stat">
+            <span class="stat-num">01</span>
+            <div>
+              <strong>Lightning Fast</strong>
+              <p>Optimized for speed &amp; performance</p>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">02</span>
+            <div>
+              <strong>Strategic</strong>
+              <p>Convert visitors into clients</p>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">03</span>
+            <div>
+              <strong>Distinct</strong>
+              <p>Design that sets you apart</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== ABOUT ======== -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="badge">Who We Are</span>
+          <h2>
+            Creative web experiences engineered for
+            <span class="text-gradient">visibility and growth</span>
+          </h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text reveal-up">
+            <p>
+              We're a team of designers, developers, and strategists who believe
+              every brand deserves a website that feels premium, memorable, and
+              intelligently structured.
+            </p>
+            <p>
+              Every project blends modern visuals, intuitive UX, and clean
+              development to help businesses present their services with
+              confidence and clarity.
+            </p>
+          </div>
+          <div class="about-features">
+            <div class="feature-card reveal-up">
+              <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              </div>
+              <div>
+                <h4>Custom Design Direction</h4>
+                <p>Unique visual identity crafted specifically for your brand</p>
+              </div>
+            </div>
+            <div class="feature-card reveal-up">
+              <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+              </div>
+              <div>
+                <h4>Responsive Everywhere</h4>
+                <p>Pixel-perfect across all devices and screen sizes</p>
+              </div>
+            </div>
+            <div class="feature-card reveal-up">
+              <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </div>
+              <div>
+                <h4>Clear Messaging</h4>
+                <p>Structured content that communicates with impact</p>
+              </div>
+            </div>
+            <div class="feature-card reveal-up">
+              <div class="feature-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div>
+                <h4>Futuristic Edge</h4>
+                <p>Modern visuals that position your brand ahead of its time</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== SERVICES ======== -->
+    <section class="section section-alt" id="services">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="badge">What We Do</span>
+          <h2>
+            Website design that
+            <span class="text-gradient">drives results</span>
+          </h2>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card service-main reveal-up">
+            <div class="service-number">01</div>
+            <span class="service-badge-active">Active Service</span>
+            <h3>Website Design</h3>
+            <p>
+              High-converting, visually stunning websites built for brands that
+              want a sharper presence, faster trust, and cleaner customer
+              journeys. From concept to launch.
+            </p>
+            <ul class="service-list">
+              <li>Landing Pages</li>
+              <li>Business Websites</li>
+              <li>Portfolio Sites</li>
+              <li>Creative Platforms</li>
+            </ul>
+          </article>
+
+          <article class="service-card service-coming reveal-up">
+            <div class="service-number">02</div>
+            <span class="service-badge-soon">Coming Soon</span>
+            <h3>Web Development</h3>
+            <p>
+              Full-stack development with modern frameworks, APIs, and scalable
+              architecture. Building the engine behind beautiful interfaces.
+            </p>
+          </article>
+
+          <article class="service-card service-coming reveal-up">
+            <div class="service-number">03</div>
+            <span class="service-badge-soon">Coming Soon</span>
+            <h3>Brand Identity</h3>
+            <p>
+              Complete visual branding &mdash; logos, color systems, typography,
+              and design guidelines that define how your brand looks and feels.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== HOW IT WORKS ======== -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="badge">How It Works</span>
+          <h2>
+            From first contact to
+            <span class="text-gradient">launch day</span>
+          </h2>
+          <p class="section-sub">
+            A streamlined process designed to get your website live — fast,
+            strategic, and stress-free.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-step reveal-up">
+            <div class="step-number">01</div>
+            <div class="step-line"></div>
+            <h4>Inquiry</h4>
+            <p>Tell us about your project through our contact form. Share your vision, goals, and timeline.</p>
+          </div>
+          <div class="process-step reveal-up">
+            <div class="step-number">02</div>
+            <div class="step-line"></div>
+            <h4>Discovery</h4>
+            <p>We discuss your brand, audience, and objectives to build a tailored strategy and design direction.</p>
+          </div>
+          <div class="process-step reveal-up">
+            <div class="step-number">03</div>
+            <div class="step-line"></div>
+            <h4>Design &amp; Build</h4>
+            <p>We craft your website with iterative feedback rounds, ensuring every pixel matches your vision.</p>
+          </div>
+          <div class="process-step reveal-up">
+            <div class="step-number">04</div>
+            <div class="step-line"></div>
+            <h4>Launch</h4>
+            <p>Your site goes live — optimized for performance, fully responsive, and ready to convert.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== TEAM ======== -->
+    <section class="section section-alt" id="team">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="badge">The Team</span>
+          <h2>
+            The people behind
+            <span class="text-gradient">FasByteX</span>
+          </h2>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card reveal-up">
+            <div class="team-avatar"><span>S</span></div>
+            <h4>Safwan</h4>
+            <span class="team-role">Manager</span>
+            <p class="team-desc">Oversees operations, strategy, and client relationships</p>
+          </div>
+          <div class="team-card reveal-up">
+            <div class="team-avatar"><span>AF</span></div>
+            <h4>Amir Firman</h4>
+            <span class="team-role">Lead Developer</span>
+            <p class="team-desc">Architects and builds robust, performant web solutions</p>
+          </div>
+          <div class="team-card reveal-up">
+            <div class="team-avatar"><span>AD</span></div>
+            <h4>Amierun Deanish</h4>
+            <span class="team-role">UI/UX Designer</span>
+            <p class="team-desc">Crafts intuitive interfaces and immersive user experiences</p>
+          </div>
+          <div class="team-card reveal-up">
+            <div class="team-avatar"><span>A</span></div>
+            <h4>Ayish</h4>
+            <span class="team-role">Marketing</span>
+            <p class="team-desc">Drives brand visibility, outreach, and growth strategy</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== PROJECTS ======== -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <span class="badge">Our Work</span>
+          <h2>
+            Projects &amp;
+            <span class="text-gradient">case studies</span>
+          </h2>
+          <p class="section-sub">
+            Our portfolio is growing. Here's where our future work will live.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-slot reveal-up">
+            <div class="slot-inner">
+              <div class="slot-icon">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+              </div>
+              <h4>Project Slot 01</h4>
+              <p>Your next showcase goes here</p>
+            </div>
+          </article>
+          <article class="project-slot reveal-up">
+            <div class="slot-inner">
+              <div class="slot-icon">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+              </div>
+              <h4>Project Slot 02</h4>
+              <p>Your next showcase goes here</p>
+            </div>
+          </article>
+          <article class="project-slot reveal-up">
+            <div class="slot-inner">
+              <div class="slot-icon">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+              </div>
+              <h4>Project Slot 03</h4>
+              <p>Your next showcase goes here</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== CONTACT ======== -->
+    <section class="section section-navy" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-info reveal-up">
+          <span class="badge badge-light">Get in Touch</span>
+          <h2>
+            Let's build something
+            <span class="text-gradient-light">extraordinary</span>
+          </h2>
+          <p>
+            Ready to launch a bold website for your business or personal brand?
+            Reach out and let's create something visually powerful, strategic,
+            and uniquely yours.
+          </p>
+        </div>
+
+        <div class="contact-form-wrap reveal-up">
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="name" class="sr-only">Your name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="email" class="sr-only">Email address</label>
+              <input type="email" id="email" name="email" placeholder="Email address" required autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="service" class="sr-only">Service type</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>What are you looking for?</option>
+                <option value="business">Business Website</option>
+                <option value="portfolio">Portfolio / Creative Platform</option>
+                <option value="landing">Landing Page</option>
+                <option value="other">Something Else</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message" class="sr-only">Your message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your vision" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-white btn-full">
+              Send Inquiry <span class="arrow">&rarr;</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="/assets/logo.png" alt="FasByteX" class="footer-logo" loading="lazy" />
+          <p>Creative websites for modern brands</p>
+        </div>
+        <div class="footer-nav">
+          <h5>Navigation</h5>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#team">Team</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-nav">
+          <h5>Services</h5>
+          <a href="#services">Website Design</a>
+          <span class="footer-muted">Web Development (Soon)</span>
+          <span class="footer-muted">Brand Identity (Soon)</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 FasByteX. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll Reveal
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('revealed');
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal-up').forEach((el) => revealObserver.observe(el));
+
+    // Mobile Menu
+    const hamburger = document.getElementById('hamburger')!;
+    const nav = document.getElementById('nav')!;
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('open');
+    });
+    nav.querySelectorAll('.nav-link').forEach((link) => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('open');
+      });
+    });
+
+    // Header scroll
+    const header = document.getElementById('header')!;
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Active nav on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + 120;
+      sections.forEach((section) => {
+        const top = (section as HTMLElement).offsetTop;
+        const height = (section as HTMLElement).offsetHeight;
+        const id = section.getAttribute('id');
+        const link = nav.querySelector(`a[href="#${id}"]`);
+        if (link) {
+          if (scrollY >= top && scrollY < top + height) {
+            nav.querySelectorAll('.nav-link').forEach((l) => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        }
+      });
+    });
+
+    // Contact form
+    document.getElementById('contactForm')!.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target as HTMLFormElement;
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const original = btn.innerHTML;
+      btn.textContent = "Sent! We'll be in touch.";
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        form.reset();
+      }, 3000);
+    });
+  </script>
+</Base>
