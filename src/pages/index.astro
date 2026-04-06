@@ -3,11 +3,13 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
   <!-- ======== HEADER ======== -->
   <header class="header" id="header">
     <div class="container header-inner">
       <a href="#home" class="logo">
-        <img src="/assets/logo.png" alt="FasByteX" class="logo-img" />
+        <img src="/assets/logo.png" alt="FasByteX" class="logo-img" width="auto" height="60" />
       </a>
       <nav class="nav" id="nav">
         <a href="#home" class="nav-link active">Home</a>
@@ -18,13 +20,13 @@ import Base from '../layouts/Base.astro';
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#contact" class="nav-link nav-cta">Get in Touch</a>
       </nav>
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <!-- ======== HERO ======== -->
     <section class="hero" id="home">
       <div class="container hero-content">
@@ -220,25 +222,25 @@ import Base from '../layouts/Base.astro';
         <div class="process-grid">
           <div class="process-step reveal-up">
             <div class="step-number">01</div>
-            <div class="step-line"></div>
+            <div class="step-line"><span class="step-dot"></span></div>
             <h4>Inquiry</h4>
             <p>Tell us about your project through our contact form. Share your vision, goals, and timeline.</p>
           </div>
           <div class="process-step reveal-up">
             <div class="step-number">02</div>
-            <div class="step-line"></div>
+            <div class="step-line"><span class="step-dot"></span></div>
             <h4>Discovery</h4>
             <p>We discuss your brand, audience, and objectives to build a tailored strategy and design direction.</p>
           </div>
           <div class="process-step reveal-up">
             <div class="step-number">03</div>
-            <div class="step-line"></div>
+            <div class="step-line"><span class="step-dot"></span></div>
             <h4>Design &amp; Build</h4>
             <p>We craft your website with iterative feedback rounds, ensuring every pixel matches your vision.</p>
           </div>
           <div class="process-step reveal-up">
             <div class="step-number">04</div>
-            <div class="step-line"></div>
+            <div class="step-line"><span class="step-dot"></span></div>
             <h4>Launch</h4>
             <p>Your site goes live — optimized for performance, fully responsive, and ready to convert.</p>
           </div>
@@ -353,10 +355,12 @@ import Base from '../layouts/Base.astro';
             <div class="form-group">
               <label for="name" class="sr-only">Your name</label>
               <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name" />
+              <span class="field-error" id="name-error">Please enter your name.</span>
             </div>
             <div class="form-group">
               <label for="email" class="sr-only">Email address</label>
               <input type="email" id="email" name="email" placeholder="Email address" required autocomplete="email" />
+              <span class="field-error" id="email-error">Please enter a valid email address.</span>
             </div>
             <div class="form-group">
               <label for="service" class="sr-only">Service type</label>
@@ -367,10 +371,12 @@ import Base from '../layouts/Base.astro';
                 <option value="landing">Landing Page</option>
                 <option value="other">Something Else</option>
               </select>
+              <span class="field-error" id="service-error">Please select a service.</span>
             </div>
             <div class="form-group">
               <label for="message" class="sr-only">Your message</label>
               <textarea id="message" name="message" placeholder="Tell us about your vision" rows="5" required></textarea>
+              <span class="field-error" id="message-error">Please tell us about your project.</span>
             </div>
             <button type="submit" class="btn btn-white btn-full">
               Send Inquiry <span class="arrow">&rarr;</span>
@@ -423,8 +429,6 @@ import Base from '../layouts/Base.astro';
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
-    function raf(time: number) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -432,8 +436,10 @@ import Base from '../layouts/Base.astro';
     // Smooth anchor links
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener('click', (e) => {
+        const href = (anchor as HTMLAnchorElement).getAttribute('href')!;
+        if (href === '#') return;
         e.preventDefault();
-        const target = document.querySelector((anchor as HTMLAnchorElement).getAttribute('href')!);
+        const target = document.querySelector(href);
         if (target) lenis.scrollTo(target as HTMLElement, { offset: -80 });
       });
     });
@@ -448,11 +454,9 @@ import Base from '../layouts/Base.astro';
       document.body.appendChild(dot);
       document.body.appendChild(ring);
 
-      let mx = 0, my = 0;
       document.addEventListener('mousemove', (e) => {
-        mx = e.clientX; my = e.clientY;
-        gsap.set(dot, { x: mx, y: my });
-        gsap.to(ring, { x: mx, y: my, duration: 0.18, ease: 'power2.out' });
+        gsap.set(dot, { x: e.clientX, y: e.clientY });
+        gsap.to(ring, { x: e.clientX, y: e.clientY, duration: 0.18, ease: 'power2.out' });
       });
 
       document.querySelectorAll('a, button, .feature-card, .team-card, .service-card').forEach((el) => {
@@ -467,36 +471,41 @@ import Base from '../layouts/Base.astro';
       });
     }
 
-    // ── Card Tilt Micro-interaction ──────────────────────────
+    // ── Card Tilt + will-change on hover only ────────────────
     document.querySelectorAll<HTMLElement>('.feature-card, .team-card, .service-card, .project-slot').forEach((card) => {
+      card.addEventListener('mouseenter', () => { card.style.willChange = 'transform'; });
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        gsap.to(card, {
-          rotateY: x * 10,
-          rotateX: -y * 10,
-          transformPerspective: 800,
-          ease: 'power2.out',
-          duration: 0.4,
-        });
+        gsap.to(card, { rotateY: x * 10, rotateX: -y * 10, transformPerspective: 800, ease: 'power2.out', duration: 0.4 });
       });
       card.addEventListener('mouseleave', () => {
-        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)',
+          onComplete: () => { card.style.willChange = 'auto'; }
+        });
       });
     });
 
-    // ── GSAP Scroll Animations ───────────────────────────────
-    const fromTo = (sel: string, delay = 0, y = 40) =>
+    // ── GSAP Hero Entrance ───────────────────────────────────
+    const ft = (sel: string, delay = 0, y = 40) =>
       gsap.fromTo(sel, { y, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power4.out', delay });
 
-    // Hero text entrance (on load)
-    fromTo('.hero-content .badge', 0.2, 30);
-    fromTo('.hero-content h1', 0.4, 50);
-    fromTo('.hero-sub', 0.6, 30);
-    fromTo('.hero-ctas', 0.75, 20);
-    fromTo('.hero-showcase', 0.9, 60);
-    fromTo('.stats-strip', 1.1, 30);
+    ft('.hero-content .badge', 0.2, 30);
+    ft('.hero-content h1', 0.4, 50);
+    ft('.hero-sub', 0.6, 30);
+    ft('.hero-ctas', 0.75, 20);
+    ft('.stats-strip', 1.1, 30);
+
+    // Showcase: entrance → float loop (GSAP owns transform, no CSS conflict)
+    gsap.fromTo('.hero-showcase',
+      { y: 60, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.2, ease: 'power4.out', delay: 0.9,
+        onComplete: () => {
+          gsap.to('.hero-showcase', { y: -10, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+        }
+      }
+    );
 
     // Section reveals via ScrollTrigger (skip hero elements already animated above)
     document.querySelectorAll<HTMLElement>('.reveal-up').forEach((el) => {
@@ -529,10 +538,15 @@ import Base from '../layouts/Base.astro';
       });
     });
 
-    // Process steps stagger
+    // Process steps + step-dot pop
     gsap.fromTo('.process-step',
       { y: 40, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.15,
+        scrollTrigger: { trigger: '.process-grid', start: 'top 80%' } }
+    );
+    gsap.fromTo('.step-dot',
+      { scale: 0 },
+      { scale: 1, duration: 0.5, ease: 'back.out(2)', stagger: 0.15, delay: 0.3,
         scrollTrigger: { trigger: '.process-grid', start: 'top 80%' } }
     );
 
@@ -550,48 +564,82 @@ import Base from '../layouts/Base.astro';
         scrollTrigger: { trigger: '.services-grid', start: 'top 80%' } }
     );
 
+    // Footer stagger
+    gsap.fromTo('.footer-brand, .footer-nav',
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.1,
+        scrollTrigger: { trigger: '.footer-top', start: 'top 90%' } }
+    );
+
     // ── Mobile Menu ──────────────────────────────────────────
     const hamburger = document.getElementById('hamburger')!;
     const nav = document.getElementById('nav')!;
     hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      nav.classList.toggle('open');
+      const isOpen = nav.classList.toggle('open');
+      hamburger.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
     });
     nav.querySelectorAll('.nav-link').forEach((link) => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         nav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
       });
     });
 
-    // ── Header scroll ────────────────────────────────────────
+    // ── Header + Active nav via Lenis ────────────────────────
     const header = document.getElementById('header')!;
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    // ── Active nav on scroll ─────────────────────────────────
-    const sections = document.querySelectorAll('section[id]');
-    lenis.on('scroll', () => {
-      const scrollY = window.scrollY + 120;
-      sections.forEach((section) => {
+    lenis.on('scroll', ({ scroll }: { scroll: number }) => {
+      header.classList.toggle('scrolled', scroll > 60);
+      const scrollY = scroll + 120;
+      document.querySelectorAll('section[id]').forEach((section) => {
         const top = (section as HTMLElement).offsetTop;
         const height = (section as HTMLElement).offsetHeight;
         const id = section.getAttribute('id');
         const link = nav.querySelector(`a[href="#${id}"]`);
-        if (link) {
-          if (scrollY >= top && scrollY < top + height) {
-            nav.querySelectorAll('.nav-link').forEach((l) => l.classList.remove('active'));
-            link.classList.add('active');
-          }
+        if (link && scrollY >= top && scrollY < top + height) {
+          nav.querySelectorAll('.nav-link').forEach((l) => l.classList.remove('active'));
+          link.classList.add('active');
         }
       });
     });
 
-    // ── Contact form ─────────────────────────────────────────
-    document.getElementById('contactForm')!.addEventListener('submit', (e) => {
+    // ── Form Validation ──────────────────────────────────────
+    function validateField(input: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement): boolean {
+      const group = input.closest('.form-group') as HTMLElement;
+      let valid = true;
+      if (input.required) {
+        valid = input.type === 'email'
+          ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim())
+          : input.value.trim().length > 0;
+      }
+      if (!valid && !group.classList.contains('has-error')) {
+        group.classList.add('has-error');
+        group.style.animation = 'none';
+        requestAnimationFrame(() => {
+          group.style.animation = 'shake 0.4s ease';
+          group.addEventListener('animationend', () => { group.style.animation = ''; }, { once: true });
+        });
+      } else if (valid) {
+        group.classList.remove('has-error');
+      }
+      return valid;
+    }
+
+    const form = document.getElementById('contactForm') as HTMLFormElement;
+    form.querySelectorAll('input, textarea, select').forEach((field) => {
+      field.addEventListener('blur', () => validateField(field as HTMLInputElement));
+      field.addEventListener('input', () => {
+        if ((field.closest('.form-group') as HTMLElement).classList.contains('has-error')) {
+          validateField(field as HTMLInputElement);
+        }
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const form = e.target as HTMLFormElement;
+      const fields = Array.from(form.querySelectorAll<HTMLInputElement>('input, textarea, select'));
+      if (!fields.map(validateField).every(Boolean)) return;
       const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       const original = btn.innerHTML;
       btn.textContent = "Sent! We'll be in touch.";
@@ -602,6 +650,7 @@ import Base from '../layouts/Base.astro';
         btn.disabled = false;
         gsap.to(btn, { opacity: 1, duration: 0.3 });
         form.reset();
+        form.querySelectorAll('.form-group').forEach((g) => g.classList.remove('has-error'));
       }, 3000);
     });
   </script>
