@@ -487,20 +487,27 @@ import Base from '../layouts/Base.astro';
     });
 
     // ── GSAP Scroll Animations ───────────────────────────────
-    // Hero text entrance
-    gsap.from('.hero-content .badge', { y: 30, opacity: 0, duration: 0.9, ease: 'power4.out', delay: 0.2 });
-    gsap.from('.hero-content h1', { y: 50, opacity: 0, duration: 1, ease: 'power4.out', delay: 0.4 });
-    gsap.from('.hero-sub', { y: 30, opacity: 0, duration: 0.9, ease: 'power4.out', delay: 0.6 });
-    gsap.from('.hero-ctas', { y: 20, opacity: 0, duration: 0.8, ease: 'power4.out', delay: 0.75 });
-    gsap.from('.hero-showcase', { y: 60, opacity: 0, duration: 1.2, ease: 'power4.out', delay: 0.9 });
-    gsap.from('.stats-strip', { y: 30, opacity: 0, duration: 0.9, ease: 'power4.out', delay: 1.1 });
+    const fromTo = (sel: string, delay = 0, y = 40) =>
+      gsap.fromTo(sel, { y, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power4.out', delay });
 
-    // Section reveals via ScrollTrigger
-    document.querySelectorAll('.reveal-up').forEach((el) => {
-      gsap.from(el, {
-        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
-        y: 50, opacity: 0, duration: 0.9, ease: 'power4.out',
-      });
+    // Hero text entrance (on load)
+    fromTo('.hero-content .badge', 0.2, 30);
+    fromTo('.hero-content h1', 0.4, 50);
+    fromTo('.hero-sub', 0.6, 30);
+    fromTo('.hero-ctas', 0.75, 20);
+    fromTo('.hero-showcase', 0.9, 60);
+    fromTo('.stats-strip', 1.1, 30);
+
+    // Section reveals via ScrollTrigger (skip hero elements already animated above)
+    document.querySelectorAll<HTMLElement>('.reveal-up').forEach((el) => {
+      if (el.closest('.hero')) return; // hero handled above
+      gsap.fromTo(el,
+        { y: 50, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.9, ease: 'power4.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+        }
+      );
     });
 
     // Counter animation for stat numbers
@@ -509,37 +516,39 @@ import Base from '../layouts/Base.astro';
       ScrollTrigger.create({
         trigger: el,
         start: 'top 85%',
+        once: true,
         onEnter: () => {
-          gsap.from({ val: 0 }, {
+          const obj = { val: 0 };
+          gsap.to(obj, {
             val: target,
             duration: 1.5,
             ease: 'power2.out',
-            onUpdate: function () {
-              el.textContent = String(Math.round(this.targets()[0].val)).padStart(2, '0');
-            },
+            onUpdate() { el.textContent = String(Math.round(obj.val)).padStart(2, '0'); },
           });
         },
-        once: true,
       });
     });
 
     // Process steps stagger
-    gsap.from('.process-step', {
-      scrollTrigger: { trigger: '.process-grid', start: 'top 80%' },
-      y: 40, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.15,
-    });
+    gsap.fromTo('.process-step',
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.15,
+        scrollTrigger: { trigger: '.process-grid', start: 'top 80%' } }
+    );
 
     // Team cards stagger
-    gsap.from('.team-card', {
-      scrollTrigger: { trigger: '.team-grid', start: 'top 80%' },
-      y: 40, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.12,
-    });
+    gsap.fromTo('.team-card',
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.12,
+        scrollTrigger: { trigger: '.team-grid', start: 'top 80%' } }
+    );
 
     // Services stagger
-    gsap.from('.service-card', {
-      scrollTrigger: { trigger: '.services-grid', start: 'top 80%' },
-      y: 40, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.12,
-    });
+    gsap.fromTo('.service-card',
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.12,
+        scrollTrigger: { trigger: '.services-grid', start: 'top 80%' } }
+    );
 
     // ── Mobile Menu ──────────────────────────────────────────
     const hamburger = document.getElementById('hamburger')!;

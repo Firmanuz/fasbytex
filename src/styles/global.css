@@ -901,11 +901,7 @@ body:has(.cursor-dot) button { cursor: none; }
 }
 
 /* ── Scroll Reveal ─────────────────────────────────────────── */
-
-/* GSAP handles reveal-up now — keep base state only */
-.reveal-up {
-  opacity: 0;
-}
+/* GSAP animates reveal-up — no CSS opacity needed */
 
 /* ── Button spring hover ───────────────────────────────────── */
 
