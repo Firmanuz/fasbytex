@@ -854,37 +854,77 @@ textarea {
   font-size: 13px;
 }
 
+/* ── Custom Cursor ─────────────────────────────────────────── */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--navy);
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--navy);
+  opacity: 0.5;
+}
+
+@media (hover: none) {
+  .cursor-dot,
+  .cursor-ring { display: none; }
+  * { cursor: auto !important; }
+}
+
+body:has(.cursor-dot) { cursor: none; }
+body:has(.cursor-dot) a,
+body:has(.cursor-dot) button { cursor: none; }
+
+/* ── Spring physics on interactive elements ────────────────── */
+
+.feature-card,
+.team-card,
+.service-card,
+.project-slot {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
 /* ── Scroll Reveal ─────────────────────────────────────────── */
 
+/* GSAP handles reveal-up now — keep base state only */
 .reveal-up {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal-up.revealed {
-  opacity: 1;
-  transform: translateY(0);
+/* ── Button spring hover ───────────────────────────────────── */
+
+.btn {
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease,
+              background 0.3s ease !important;
 }
 
-.about-features .reveal-up:nth-child(2) { transition-delay: 0.08s; }
-.about-features .reveal-up:nth-child(3) { transition-delay: 0.16s; }
-.about-features .reveal-up:nth-child(4) { transition-delay: 0.24s; }
+/* ── Accessibility: reduced motion ────────────────────────── */
 
-.team-grid .reveal-up:nth-child(2) { transition-delay: 0.1s; }
-.team-grid .reveal-up:nth-child(3) { transition-delay: 0.2s; }
-.team-grid .reveal-up:nth-child(4) { transition-delay: 0.3s; }
-
-.services-grid .reveal-up:nth-child(2) { transition-delay: 0.1s; }
-.services-grid .reveal-up:nth-child(3) { transition-delay: 0.2s; }
-
-.projects-grid .reveal-up:nth-child(2) { transition-delay: 0.1s; }
-.projects-grid .reveal-up:nth-child(3) { transition-delay: 0.2s; }
-
-.process-grid .reveal-up:nth-child(2) { transition-delay: 0.1s; }
-.process-grid .reveal-up:nth-child(3) { transition-delay: 0.2s; }
-.process-grid .reveal-up:nth-child(4) { transition-delay: 0.3s; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .cursor-dot,
+  .cursor-ring { display: none !important; }
+}
 
 /* ── Responsive ────────────────────────────────────────────── */
 
